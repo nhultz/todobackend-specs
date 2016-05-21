@@ -35,7 +35,7 @@ describe('Create Todo Item', function() {
     var result;
 
     before(function() {
-        result = post(url, { title: 'Walk the dog' });
+        result = post(url, {title: 'Walk the dog'});
     });
 
     it('should return a 201 CREATED response', function() {
@@ -62,7 +62,7 @@ describe('Create Todo Item', function() {
 describe('Update Todo Item', function() {
     var location;
 
-    beforeEach(function() {
+    beforeEach(function(done) {
         post(url, {title: 'Walk the dog'}).then(function(res){
             location = res.header['location'];
             done();
@@ -87,8 +87,8 @@ describe('Update Todo Item', function() {
 describe('Delete Todo Item', function() {
     var location;
 
-    beforeEach(function() {
-        post(url, {'Walk the dog'}).then(function(res) {
+    beforeEach(function(done) {
+        post(url, {title: 'Walk the dog'}).then(function(res) {
             location = res.header['location'];
             done();
         });
@@ -114,7 +114,7 @@ describe('Delete Todo Item', function() {
 // POST request with data and return promise
 function post(url, data) {
     return request.post(url)
-        .set('Content-Type', 'application.json')
+        .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
         .send(data)
         .end();
